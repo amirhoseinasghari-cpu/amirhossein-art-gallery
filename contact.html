@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Amirhossein Asghari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        /* نویگیشن */
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        /* هدر فرم */
+        .contact-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 20px 60px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .contact-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* بخش فرم */
+        .contact-section {
+            padding: 80px 20px;
+            background: #1a1a1a;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        
+        .contact-info {
+            padding: 30px;
+        }
+        
+        .info-item {
+            margin-bottom: 30px;
+        }
+        
+        .info-title {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        
+        .contact-form {
+            background: #2d2d2d;
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1em;font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* فوتر */
+        footer {
+            background: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #764ba2;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            margin-top: 20px;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .contact-title {
+                font-size: 2.2em;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نویگیشن -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Amirhossein Asghari</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="contact.html" style="color: #667eea;">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هدر فرم -->
+    <section class="contact-hero">
+        <h1 class="contact-title">Get In Touch</h1>
+        <p class="contact-subtitle">
+            آماده همکاری در پروژه‌های NFT و هنر دیجیتال هستم. 
+            برای بحث درباره پروژه یا خرید آثار با من در ارتباط باشید.
+        </p>
+    </section>
+
+    <!-- بخش اصلی فرم -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <!-- اطلاعات تماس -->
+            <div class="contact-info">
+                <div class="info-item">
+                    <h3 class="info-title">📧 Email</h3>
+                    <p>amirhossein@example.com</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3 class="info-title">💼 Platforms</h3>
+                    <p>OpenSea | Rarible | Foundation</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3 class="info-title">⏱️ Response Time</h3>
+                    <p>Usually within 24 hours</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3 class="info-title">🎨 Services</h3>
+                    <p>Custom NFT Art • Digital Painting • Collaborative Projects</p>
+                </div>
+            </div>
+
+            <!-- فرم تماس -->
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name" class="form-label">نام کامل</label>
+                    <input type="text" id="name" name="name" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">ایمیل</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div><div class="form-group">
+                    <label for="subject" class="form-label">موضوع</label>
+                    <select id="subject" name="subject" class="form-input" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="commission">سفارش اثر هنری</option>
+                        <option value="collaboration">همکاری پروژه</option>
+                        <option value="purchase">خرید اثر</option>
+                        <option value="other">سایر</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="budget" class="form-label">بودجه (اختیاری)</label>
+                    <select id="budget" name="budget" class="form-input">
+                        <option value="">انتخاب کنید</option>
+                        <option value="0.05-0.1">۰.۰۵ - ۰.۱ ETH</option>
+                        <option value="0.1-0.5">۰.۱ - ۰.۵ ETH</option>
+                        <option value="0.5-1">۰.۵ - ۱ ETH</option>
+                        <option value="1+">۱+ ETH</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="form-label">پیام</label>
+                    <textarea id="message" name="message" class="form-textarea" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">ارسال پیام</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">OpenSea</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">Email</a>
+        </div>
+        <p class="copyright">
+            © 2024 Amirhossein Asghari. All rights reserved.<br>
+            Digital Art & NFT Creation
+        </p>
+    </footer>
+
+    <script src="contact.js"></script>
+</body>
+</html>

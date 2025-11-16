@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Amirhossein Asghari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        /* نویگیشن */
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        .nav-links a.active {
+            color: #667eea;
+        }
+        
+        /* هدر درباره من */
+        .about-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff10" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-title {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .about-subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        /* بخش‌های اصلی */
+        .about-section {
+            padding: 80px 20px;
+            background: #1a1a1a;
+        }
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* داستان هنری */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        
+        .story-image {
+            background: #2d2d2d;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+            border: 2px solid #333;position: relative;
+        }
+        
+        .story-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .story-image:hover .story-img {
+            transform: scale(1.05);
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            background: linear-gradient(45deg, #3d3d3d, #555);
+            color: #666;
+        }
+        
+        .story-content {
+            padding: 20px;
+        }
+        
+        .story-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        /* مهارت‌ها */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .skill-category {
+            background: #2d2d2d;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+        }
+        
+        .skill-title {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-level {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        /* جدول زمانی */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            background: #2d2d2d;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            border: 1px solid #333;
+            width: calc(50% - 40px);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            margin-right: auto;
+        }
+        
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+        }
+        
+        .timeline-year {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-content h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        /* فلسفه هنری */
+        .philosophy-section {
+            background: #2d2d2d;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .philosophy-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2em;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .quote {
+            font-style: italic;
+            margin: 40px 0;padding: 30px;
+            border-right: 3px solid #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+        
+        /* بخش گرگ */
+        .wolf-section {
+            background: #1a1a1a;
+            padding: 80px 20px;
+        }
+        
+        .wolf-badge {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        
+        /* فوتر */
+        footer {
+            background: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #764ba2;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            margin-top: 20px;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-title {
+                font-size: 2.5em;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 40px !important;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نویگیشن -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Amirhossein Asghari</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هدر درباره من -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1 class="about-title">از بوم تا بلاک چین</h1>
+            <p class="about-subtitle">بیست سال سفر تبدیل بینش‌های معنوی به آثار دیجیتال ماندگار از طریق NFT</p>
+        </div>
+    </section>
+
+    <!-- داستان هنری -->
+    <section class="about-section">
+        <div class="section-container">
+            <div class="story-grid">
+                <div class="story-image">
+                    <!-- جای عکس داستان هنری -->
+                    <img src="images/about-story.jpg" alt="داستان هنری امیرحسین اصغری" class="story-img">
+                    <div class="image-placeholder" style="display: none;">🎨</div>
+                </div>
+                <div class="story-content">
+                    <h2 class="section-title">آغاز سفر من</h2>
+                    <p class="story-text">
+                        سفر هنری من بیست سال پیش با اولین نقاشی طبیعت‌ام آغاز شد.
+                        حتی در آن زمان، احساس ارتباط عمیقی با طبیعت داشتم که بعدها پایه‌ای برای بیان هنری من شد.
+                    </p>
+                    <p class="story-text">
+                        طی سال‌ها کشف کردم که هنر واقعی از درون می‌آید - از عمق معنوی و بینش‌های درونی
+                        که فراتر از ادراک معمولی هستند. آثار من پلی شدند بین دنیای فیزیکی و قلمروهای معنوی.</p>
+                </div>
+            </div>
+
+            <!-- مهارت‌ها -->
+            <h2 class="section-title">تخصص‌ها و مهارت‌ها</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="skill-title">🎨 سبک‌های هنری مدرن</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span>هنر انتزاعی معنوی</span>
+                            <span class="skill-level">متخصص</span>
+                        </li>
+                        <li class="skill-item">
+                            <span>نقاشی دیجیتال مدرن</span>
+                            <span class="skill-level">حرفه‌ای</span>
+                        </li>
+                        <li class="skill-item">
+                            <span>هنر الهام‌گرفته از چشم سوم</span>
+                            <span class="skill-level">استاد</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-title">🚀 NFT و فناوری</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span>خلق NFT معنوی</span>
+                            <span class="skill-level">حرفه‌ای</span>
+                        </li>
+                        <li class="skill-item">
+                            <span>تبدیل هنر دیجیتال</span>
+                            <span class="skill-level">پیشرفته</span>
+                        </li>
+                        <li class="skill-item">
+                            <span>هنر بلاک چینی</span>
+                            <span class="skill-level">متوسط</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="skill-title">🖌️ ریشه‌های سنتی</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <span>نقاشی طبیعت</span>
+                            <span class="skill-level">متخصص</span>
+                        </li>
+                        <li class="skill-item">
+                            <span>مفاهیم هنری معنوی</span>
+                            <span class="skill-level">استاد</span>
+                        </li>
+                        <li class="skill-item">
+                            <span>هنر الهام‌گرفته از طبیعت</span>
+                            <span class="skill-level">حرفه‌ای</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- جدول زمانی -->
+            <h2 class="section-title">مسیر حرفه‌ای</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">۱۳۸۳</div>
+                    <div class="timeline-content">
+                        <h4>اولین نقاشی طبیعت</h4>
+                        <p>آغاز سفر هنری من با هنر الهام‌گرفته از طبیعت</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">۱۳۹۹</div>
+                    <div class="timeline-content">
+                        <h4>بیداری معنوی در هنر</h4>
+                        <p>شروع خلق آثار الهام‌گرفته از بینش‌های چشم سوم و ارتباطات معنوی</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">۱۴۰۰</div>
+                    <div class="timeline-content">
+                        <h4>اولین خلق NFT</h4>
+                        <p>ورود به دنیای بلاک چین با اولین آثار هنری معنوی دیجیتال</p>
+                    </div>
+                </div><div class="timeline-item">
+                    <div class="timeline-year">۱۴۰۲</div>
+                    <div class="timeline-content">
+                        <h4>اولین فروش NFT</h4>
+                        <p>فروش اولین اثر NFT معنوی پس از ۳ سال حضور در این فضا</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">۱۴۰۳</div>
+                    <div class="timeline-content">
+                        <h4>مجموعه روح گرگ</h4>
+                        <p>تمرکز بر هنرهای با تم گرگ که نشان‌دهنده وحدت با طبیعت و قدرت معنوی هستند</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فلسفه هنری -->
+    <section class="philosophy-section">
+        <div class="section-container">
+            <h2 class="section-title">فلسفه هنری</h2>
+            <div class="philosophy-text">
+                <p>
+                    هنر من تجلی انرژی معنوی و بینش‌های درونی است که از طریق آنچه بسیاری "چشم سوم" می‌نامند،
+                    قابل دسترسی می‌شود. هر اثر نشان‌دهنده سفری به درون آگاهی عمیق‌تر و
+                    ارتباط با روح جهانی است که تمام طبیعت را به هم پیوند می‌دهد.
+                </p>
+                
+                <div class="quote">
+                    "از طریق هنرم، انرژی اولیه طبیعت و خرد دنیای روح را هدایت می‌کنم،
+                    پل‌هایی بین آگاهی انسانی و روح وحش خلق می‌کنم."
+                </div>
+                
+                <p>
+                    گرگ، که تم مکرر در کارهای من است، این فلسفه را به طور کامل symbol می‌کند -
+                    نشان‌دهنده هر دو آزادی وحشی و ارتباط معنوی عمیق، تعادل بین قدرت فردی
+                    و وحدت با گله، با طبیعت، با خود کیهان.
+                </p>
+                
+                <p>
+                    در فضای NFT، هدفم خلق مصنوعات دیجیتالی است که انرژی معنوی را حمل می‌کنند،
+                    و به بینندگان نه فقط زیبایی بصری، بلکه دروازه‌ای به سوی درک عمیق‌تر و
+                    ارتباط با طبیعت معنوی خودشان ارائه می‌دهند.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش ویژه گرگ -->
+    <section class="about-section wolf-section">
+        <div class="section-container">
+            <h2 class="section-title">مجموعه روح گرگ</h2>
+            <div class="story-grid">
+                <div class="story-content">
+                    <p class="story-text">
+                        گرگ در هنر من بیش از فقط یک حیوان را نمایندگی می‌کند - این موجود نماد پل
+                        بین آگاهی انسانی و خرد طبیعی است. هر نقاشی گرگ حامل
+                        انرژی آزادی، شهود و راهنمایی معنوی است.
+                    </p>
+                    <p class="story-text">
+                        از طریق چشمان گرگ، به کاوش در مضامین وحدت با طبیعت، قدرت معنوی،
+                        و تعادل بین استقلال وحشی و ارتباط عمیق با گله،
+                        با زمین، با خود کیهان می‌پردازم.</p>
+                    <div class="wolf-badge">
+                        🐺 هنر حیوان روح
+                    </div>
+                </div>
+                <div class="story-image">
+                    <!-- جای عکس گرگ -->
+                    <img src="images/wolf-art.jpg" alt="مجموعه روح گرگ" class="story-img">
+                    <div class="image-placeholder" style="display: none;">🐺</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">OpenSea</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="contact.html" class="social-link">Contact</a>
+        </div>
+        <p class="copyright">
+            © 2024 Amirhossein Asghari. All rights reserved.<br>
+            Digital Art & NFT Creation
+        </p>
+    </footer>
+
+    <script>
+        // اگر عکس‌ها لود نشدند، placeholders رو نمایش بده
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.story-img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                };
+            });
+        });
+    </script>
+</body>
+</html>
