@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بلاگ - امیرحسین اصغری</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: Tahoma; 
+            background: #0f0f0f; 
+            color: white; 
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .header { text-align: center; margin: 40px 0; }
+        .blog-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+            max-width: 1000px; 
+            margin: 0 auto;
+        }
+        .blog-card {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        .blog-card:hover { transform: translateY(-5px); }
+        .blog-card h3 { color: #667eea; margin: 10px 0; }
+        .blog-card p { color: #ccc; font-size: 14px; }
+        .read-more { 
+            color: #667eea; 
+            text-decoration: none; 
+            display: inline-block; 
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>یادداشت‌های هنری</h1>
+        <p>فرآیند خلاقیت و داستان‌های پشت آثار</p>
+    </div>
+
+    <div class="blog-grid">
+        <div class="blog-card">
+            <h3>فرآیند خلق NFT معنوی</h3>
+            <p>چگونه یک بینش معنوی را به اثر دیجیتال تبدیل می‌کنم...</p>
+            <a href="post1.html" class="read-more">ادامه مطلب →</a>
+        </div>
+
+        <div class="blog-card">
+            <h3>داستان مجموعه گرگ</h3>
+            <p>کشف معنای عمیق گرگ در هنر و فلسفه شخصی...</p>
+            <a href="post2.html" class="read-more">ادامه مطلب →</a>
+        </div>
+    </div>
+</body>
+</html>

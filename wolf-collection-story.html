@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Amirhossein Asghari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        /* نویگیشن */
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        .nav-links a.active {
+            color: #667eea;
+        }
+        
+        /* هدر بلاگ */
+        .blog-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff10" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .blog-title {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .blog-subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        /* محتوای بلاگ */
+        .blog-section {
+            padding: 80px 20px;
+            background: #1a1a1a;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* شبکه پست‌ها */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .blog-card {
+            background: #2d2d2d;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #333;text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 250px;
+            background: #3d3d3d;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-card:hover .blog-img {
+            transform: scale(1.05);
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            background: linear-gradient(45deg, #3d3d3d, #555);
+            color: #666;
+        }
+        
+        .blog-content {
+            padding: 30px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+        
+        .blog-date {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+        
+        .blog-category {
+            background: rgba(76, 175, 80, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+        
+        .blog-card-title {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+        
+        .blog-card:hover .read-more {
+            gap: 10px;
+        }
+        
+        /* دسته‌بندی‌ها */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: #2d2d2d;
+            color: #ffffff;
+            border: 1px solid #444;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .category-btn.active,
+        .category-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-color: #667eea;
+        }
+        
+        /* فوتر */
+        footer {
+            background: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #764ba2;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            margin-top: 20px;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-title {
+                font-size: 2.5em;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }.categories {
+                gap: 10px;
+            }
+            
+            .category-btn {
+                padding: 8px 16px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نویگیشن -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Amirhossein Asghari</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="index.html" class="active">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هدر بلاگ -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h1 class="blog-title">یادداشت‌های هنری</h1>
+            <p class="blog-subtitle">اشتراک‌گذاری فرآیند خلاقیت، بینش‌های معنوی و داستان‌های پشت آثار</p>
+        </div>
+    </section>
+
+    <!-- محتوای بلاگ -->
+    <section class="blog-section">
+        <div class="blog-container">
+            <!-- دسته‌بندی‌ها -->
+            <div class="categories">
+                <button class="category-btn active" data-category="all">همه مطالب</button>
+                <button class="category-btn" data-category="process">فرآیند خلاقیت</button>
+                <button class="category-btn" data-category="spiritual">معنویت در هنر</button>
+                <button class="category-btn" data-category="nft">NFT & بلاک چین</button>
+                <button class="category-btn" data-category="behind-the-scenes">پشت صحنه</button>
+            </div>
+
+            <h2 class="section-title">آخرین مطالب</h2>
+            
+            <!-- شبکه پست‌ها -->
+            <div class="blog-grid">
+                <!-- پست ۱ -->
+                <a href="creating-spiritual-nft.html" class="blog-card" data-category="process nft">
+                    <div class="blog-image">
+                        <img src="images/blog1-cover.jpg" alt="فرآیند خلق NFT معنوی" class="blog-img">
+                        <div class="image-placeholder">🎨</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">۲۵ دی ۱۴۰۲</span>
+                            <span class="blog-category">فرآیند خلاقیت</span>
+                        </div>
+                        <h3 class="blog-card-title">فرآیند خلق یک NFT معنوی: از ایده تا بلاک چین</h3>
+                        <p class="blog-excerpt">
+                            چگونه یک بینش معنوی را به اثر دیجیتال تبدیل می‌کنم؟ در این پست، قدم به قدم 
+                            فرآیند خلق آثار NFT خود را به اشتراک می‌گذارم...
+                        </p>
+                        <span class="read-more">
+                            ادامه مطلب 
+                            <span>→</span>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- پست ۲ -->
+                <a href="wolf-collection-story.html" class="blog-card" data-category="spiritual behind-the-scenes">
+                    <div class="blog-image">
+                        <img src="images/blog2-cover.jpg" alt="داستان مجموعه گرگ" class="blog-img">
+                        <div class="image-placeholder">🐺</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">۱۵ بهمن ۱۴۰۲</span>
+                            <span class="blog-category">معنویت در هنر</span>
+                        </div>
+                        <h3 class="blog-card-title">داستان پشت مجموعه روح گرگ: نماد وحدت با طبیعت</h3>
+                        <p class="blog-excerpt">
+                            کشف معنای عمیق گرگ در هنر من و چگونه این موجود نمادین به بخشی از 
+                            فلسفه هنری من تبدیل شد...
+                        </p>
+                        <span class="read-more">
+                            <span>→</span>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- پست ۳ -->
+                <a href="third-eye-art.html" class="blog-card" data-category="spiritual process">
+                    <div class="blog-image">
+                        <img src="images/blog3-cover.jpg" alt="هنر چشم سوم" class="blog-img">
+                        <div class="image-placeholder">👁️</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">۵ اسفند ۱۴۰۲</span>
+                            <span class="blog-category">پشت صحنه</span>
+                        </div>
+                        <h3 class="blog-card-title">هنر و چشم سوم: چگونه بینش‌های درونی را به تصویر می‌کشم</h3>
+                        <p class="blog-excerpt">
+                            تجربیات شخصی من در زمینه استفاده از "چشم سوم" برای خلق آثار هنری 
+                            و چگونه این تمرین زندگی و هنر من را متحول کرد...
+                        </p>
+                        <span class="read-more">
+                            ادامه مطلب 
+                            <span>→</span>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">OpenSea</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="../contact.html" class="social-link">Contact</a>
+        </div>
+        <p class="copyright">
+            © 2024 Amirhossein Asghari. All rights reserved.<br>
+            Digital Art & NFT Creation
+        </p>
+    </footer>
+
+    <script>
+        // فیلتر کردن بر اساس دسته‌بندی
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const blogCards = document.querySelectorAll('.blog-card');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // حذف active از همه دکمه‌ها
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // اضافه کردن active به دکمه کلیک شده
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // نمایش پست‌ها بر اساس دسته‌بندی
+                    blogCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // مدیریت خطای عکس‌ها
+            const blogImages = document.querySelectorAll('.blog-img');
+            blogImages.forEach(img => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                };
+            });
+        });
+    </script>
+</body>
+</html>ادامه مطلب<span>→</span>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- پست ۳ -->
+                <a href="third-eye-art.html" class="blog-card" data-category="spiritual process">
+                    <div class="blog-image">
+                        <img src="images/blog3-cover.jpg" alt="هنر چشم سوم" class="blog-img">
+                        <div class="image-placeholder">👁️</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">۵ اسفند ۱۴۰۲</span>
+                            <span class="blog-category">پشت صحنه</span>
+                        </div>
+                        <h3 class="blog-card-title">هنر و چشم سوم: چگونه بینش‌های درونی را به تصویر می‌کشم</h3>
+                        <p class="blog-excerpt">
+                            تجربیات شخصی من در زمینه استفاده از "چشم سوم" برای خلق آثار هنری 
+                            و چگونه این تمرین زندگی و هنر من را متحول کرد...
+                        </p>
+                        <span class="read-more">
+                            ادامه مطلب 
+                            <span>→</span>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">OpenSea</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="../contact.html" class="social-link">Contact</a>
+        </div>
+        <p class="copyright">
+            © 2024 Amirhossein Asghari. All rights reserved.<br>
+            Digital Art & NFT Creation
+        </p>
+    </footer>
+
+    <script>
+        // فیلتر کردن بر اساس دسته‌بندی
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const blogCards = document.querySelectorAll('.blog-card');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // حذف active از همه دکمه‌ها
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // اضافه کردن active به دکمه کلیک شده
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // نمایش پست‌ها بر اساس دسته‌بندی
+                    blogCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // مدیریت خطای عکس‌ها
+            const blogImages = document.querySelectorAll('.blog-img');
+            blogImages.forEach(img => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    this.nextElementSibling.style.display = 'flex';
+                };
+            });
+        });
+    </script>
+</body>
+</html>
