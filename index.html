@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amirhossein Asghari - Digital Art Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        /* هدر و معرفی */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff10" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .profile-container {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.3);
+            margin: 0 auto 30px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .name {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.4em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .bio {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+        
+        /* گالری آثار */
+        .gallery-section {
+            padding: 80px 20px;
+            background: #1a1a1a;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .art-work {
+            background: #2d2d2d;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .art-work:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: #667eea;
+        }
+        
+        .art-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background: #1a1a1a;
+        }
+        
+        .art-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .art-work:hover .art-img {
+            transform: scale(1.05);
+        }
+        
+        .art-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05));
+            pointer-events: none;
+        }.art-info {
+            padding: 25px;
+        }
+        
+        .art-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .art-description {
+            opacity: 0.8;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .art-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .price {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .nft-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        /* فوتر */
+        footer {
+            background: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #764ba2;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            margin-top: 20px;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2.2em;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- بخش معرفی -->
+    <header class="hero">
+        <div class="profile-container">
+            <img src="images/profile.jpg" alt="Amirhossein Asghari" class="profile-img">
+            <h1 class="name">Amirhossein Asghari</h1>
+            <p class="tagline">Digital Artist & NFT Creator</p>
+            <p class="bio">
+                خالق آثار دیجیتال منحصر به فرد. تلفیق هنر سنتی با تکنولوژی مدرن 
+                برای خلق تجربه‌های بصری فراموش‌نشدنی.
+            </p>
+        </div>
+    </header>
+
+    <!-- گالری آثار -->
+    <section class="gallery-section">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery">
+            <!-- اثر ۱ -->
+            <div class="art-work">
+                <div class="art-image">
+                    <img src="images/art1.jpg" alt="Digital Dreams" class="art-img">
+                </div>
+                <div class="art-info">
+                    <h3 class="art-title">Digital Dreams</h3>
+                    <p class="art-description">
+                        اولین اثر NFT من که در پلتفرم OpenSea منتشر شده است.
+                        تلفیق رنگ‌های دیجیتال با مفاهیم انتزاعی.
+                    </p>
+                    <div class="art-meta">
+                        <span class="price">0.1 ETH</span>
+                        <span class="nft-badge">NFT</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- اثر ۲ -->
+            <div class="art-work">
+                <div class="art-image">
+                    <img src="images/art2.jpg" alt="Abstract Reality" class="art-img">
+                </div>
+                <div class="art-info">
+                    <h3 class="art-title">Abstract Reality</h3>
+                    <p class="art-description">
+                        کاوش در مرزهای هنر انتزاعی دیجیتال. 
+                        هر بیننده برداشت متفاوتی از این اثر خواهد داشت.</p>
+                    <div class="art-meta">
+                        <span class="price">0.08 ETH</span>
+                        <span class="nft-badge">NFT</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- اثر ۳ -->
+            <div class="art-work">
+                <div class="art-image">
+                    <img src="images/art3.jpg" alt="Fire & Code" class="art-img">
+                </div>
+                <div class="art-info">
+                    <h3 class="art-title">Fire & Code</h3>
+                    <p class="art-description">
+                        هنر الگوریتمی و کد. خلق شده با ترکیب برنامه‌نویسی 
+                        و خلاقیت هنری.
+                    </p>
+                    <div class="art-meta">
+                        <span class="price">0.15 ETH</span>
+                        <span class="nft-badge">NFT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">OpenSea</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">Email</a>
+        </div>
+        <p class="copyright">
+            © 2024 Amirhossein Asghari. All rights reserved.<br>
+            Created with passion and code.
+        </p>
+    </footer>
+    <script src="scripts/script.js"></script>
+    <!-- نویگیشن -->
+<nav class="navbar" style="background: rgba(26, 26, 26, 0.95); padding: 20px; position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(10px);">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+        <a href="index.html" style="font-size: 1.5em; font-weight: bold; background: linear-gradient(45deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none;">
+            Amirhossein Asghari
+        </a>
+        <div style="display: flex; gap: 30px;">
+            <a href="index.html" style="color: #ffffff; text-decoration: none; transition: color 0.3s ease;">Home</a>
+            <a href="contact.html" style="color: #667eea; text-decoration: none; transition: color 0.3s ease;">Contact</a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
